@@ -13,6 +13,14 @@ import DoctorDashboard from './pages/DoctorDashboard';
 import ClinicDashboard from './pages/ClinicDashboard';
 import PrivateRoute from './components/PrivateRoute';
 
+// ✅ Existing import
+import BookAppointment from './pages/BookAppointment';
+
+// ✅ New imports for Patient pages
+import MyPrescription from './pages/MyPrescription';
+import SetReminders from './pages/SetReminders';
+import JoinVirtualVisit from './pages/JoinVirtualVisit';
+
 function App() {
   return (
     <AuthProvider>
@@ -29,6 +37,10 @@ function App() {
           {/* Protected Routes */}
           <Route element={<PrivateRoute allowedRole="Patient" />}>
             <Route path="/patient-dashboard" element={<PatientDashboard />} />
+            <Route path="/book-appointment" element={<BookAppointment />} />
+            <Route path="/my-prescription" element={<MyPrescription />} />
+            <Route path="/set-reminders" element={<SetReminders />} />
+            <Route path="/join-virtual-visit" element={<JoinVirtualVisit />} />
           </Route>
 
           <Route element={<PrivateRoute allowedRole="Doctor" />}>
