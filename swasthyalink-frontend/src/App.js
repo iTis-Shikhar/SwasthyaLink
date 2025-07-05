@@ -11,6 +11,7 @@ import Help from './pages/Help';
 import PatientDashboard from './pages/PatientDashboard';
 import DoctorDashboard from './pages/DoctorDashboard';
 import ClinicDashboard from './pages/ClinicDashboard';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
@@ -18,14 +19,25 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/about" element={<About />} />
           <Route path="/help" element={<Help />} />
-          <Route path="/patient-dashboard" element={<PatientDashboard />} />
-          <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
-          <Route path="/clinic-dashboard" element={<ClinicDashboard />} />
+
+          {/* Protected Routes */}
+          <Route element={<PrivateRoute allowedRole="Patient" />}>
+            <Route path="/patient-dashboard" element={<PatientDashboard />} />
+          </Route>
+
+          <Route element={<PrivateRoute allowedRole="Doctor" />}>
+            <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
+          </Route>
+
+          <Route element={<PrivateRoute allowedRole="Clinic" />}>
+            <Route path="/clinic-dashboard" element={<ClinicDashboard />} />
+          </Route>
         </Routes>
       </Router>
     </AuthProvider>

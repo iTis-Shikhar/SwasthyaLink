@@ -13,8 +13,22 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  // 🔐 Helper: Get dashboard route by user role
+  const getDashboardRouteByRole = (role) => {
+    switch (role) {
+      case 'Patient':
+        return '/patient-dashboard';
+      case 'Doctor':
+        return '/doctor-dashboard';
+      case 'Clinic':
+        return '/clinic-dashboard';
+      default:
+        return '/';
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, getDashboardRouteByRole }}>
       {children}
     </AuthContext.Provider>
   );

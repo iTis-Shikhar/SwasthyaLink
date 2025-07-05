@@ -10,7 +10,7 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [role, setRole] = useState('Patient');
 
-  const { login } = useAuth(); // ✅ import login context
+  const { login, getDashboardRouteByRole } = useAuth();
   const navigate = useNavigate();
 
   const handleRegister = (e) => {
@@ -21,53 +21,29 @@ function Register() {
       return;
     }
 
-    // 🚧 Later: send this data to backend to register
-    // For now, simulate register and login
     const user = {
       name,
       email,
-      role: role.toLowerCase(), // lowercase for dashboard path
+      role, // Capitalized e.g., "Patient"
     };
 
-    login(user); // ✅ update global user state
+    // Set global user context
+    login(user);
 
-    // ✅ redirect based on role
-    navigate(`/${user.role}-dashboard`);
+    // Navigate to correct dashboard
+    const dashboardPath = getDashboardRouteByRole(role);
+    navigate(dashboardPath);
   };
 
   return (
     <div className="auth-container">
       <h2>Register</h2>
       <form onSubmit={handleRegister}>
-        <input
-          type="text"
-          placeholder="Full Name"
-          value={name}
-          onChange={e => setName(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={e => setConfirmPassword(e.target.value)}
-          required
-        />
-        <select value={role} onChange={e => setRole(e.target.value)}>
+        <input type="text" placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} required />
+        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+        <select value={role} onChange={(e) => setRole(e.target.value)}>
           <option value="Patient">Patient</option>
           <option value="Doctor">Doctor</option>
           <option value="Clinic">Clinic</option>

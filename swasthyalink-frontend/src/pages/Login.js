@@ -6,34 +6,35 @@ import { useNavigate } from 'react-router-dom';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useAuth();
+  const { login, getDashboardRouteByRole } = useAuth();
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // 🚧 Later replace this with real backend logic
+    // Simulated backend logic
     let role = '';
-    if (email.includes('patient')) role = 'patient';
-    else if (email.includes('doctor')) role = 'doctor';
-    else if (email.includes('clinic')) role = 'clinic';
+    if (email.includes('patient')) role = 'Patient';
+    else if (email.includes('doctor')) role = 'Doctor';
+    else if (email.includes('clinic')) role = 'Clinic';
     else {
-      alert('Invalid credentials');
+      alert('Invalid email or role not recognized');
       return;
     }
 
-    login({ email, role });
+    const user = { email, role };
+    login(user);
 
-    // Redirect based on role
-    navigate(`/${role}-dashboard`);
+    const dashboardPath = getDashboardRouteByRole(role);
+    navigate(dashboardPath);
   };
 
   return (
     <div className="auth-container">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
-        <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
-        <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} required />
+        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         <button type="submit">Login</button>
       </form>
     </div>
