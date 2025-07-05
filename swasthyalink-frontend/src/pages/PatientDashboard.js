@@ -1,7 +1,10 @@
 import React from 'react';
 import './Dashboard.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function PatientDashboard() {
+  const navigate = useNavigate();
+
   return (
     <div className="dashboard-container">
       <h2 className="dashboard-title">Welcome, Patient</h2>
@@ -9,22 +12,22 @@ export default function PatientDashboard() {
         <div className="dashboard-card">
           <h3>📅 Book Appointment</h3>
           <p>Schedule a consultation with your doctor.</p>
-          <button>Book Now</button>
+          <button onClick={() => navigate('/book-appointment')}>Book Now</button>
         </div>
         <div className="dashboard-card">
           <h3>💊 My Prescription</h3>
           <p>View your prescribed medicines anytime.</p>
-          <button>View Prescription</button>
+          <button onClick={() => navigate('/my-prescription')}>View Prescription</button>
         </div>
         <div className="dashboard-card">
           <h3>⏰ Set Reminders</h3>
           <p>Get alerts for taking medicines and appointments.</p>
-          <button>Set Reminder</button>
+          <button onClick={() => navigate('/set-reminders')}>Set Reminder</button>
         </div>
         <div className="dashboard-card">
           <h3>📹 Join Virtual Visit</h3>
           <p>Start an online consultation with your doctor.</p>
-          <button>Join Now</button>
+          <button onClick={() => navigate('/join-virtual-visit')}>Join Now</button>
         </div>
       </div>
     </div>
