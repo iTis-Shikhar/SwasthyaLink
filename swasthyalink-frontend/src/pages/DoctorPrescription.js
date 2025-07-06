@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-//import './DoctorPrescription.css';
+import { db } from '../firebase';
+import { collection, addDoc } from 'firebase/firestore';
+import { useAuth } from '../context/AuthContext';
+// import './DoctorPrescription.css'; // Uncomment if you have styles
 
 export default function DoctorPrescription() {
+  const { user } = useAuth();
+
   const [patient, setPatient] = useState({ name: '', age: '', email: '' });
   const [medicines, setMedicines] = useState(['']);
   const [notes, setNotes] = useState('');
@@ -20,13 +25,39 @@ export default function DoctorPrescription() {
     setMedicines([...medicines, '']);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Patient Info:', patient);
-    console.log('Medicines:', medicines);
-    console.log('Doctor Notes:', notes);
-    alert('Prescription submitted and sent to patient!');
-    // You can send this data to Firestore or an email service later
+
+    if (
+      !patient.name ||
+      !patient.age ||
+      !patient.email ||
+      medicines.some((med) => !med)
+    ) {
+      alert('Please fill out all fields.');
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, 'prescriptions'), {
+        patientEmail: patient.email,
+        patientName: patient.name,
+        patientAge: patient.age,
+        doctorName: user?.email || 'Unknown Doctor',
+        date: new Date().toISOString().split('T')[0],
+        medicines,
+        notes
+      });
+
+      alert('Prescription submitted and saved successfully!');
+      // Clear form
+      setPatient({ name: '', age: '', email: '' });
+      setMedicines(['']);
+      setNotes('');
+    } catch (error) {
+      console.error('Error submitting prescription:', error);
+      alert('Error submitting prescription: ' + error.message);
+    }
   };
 
   return (
@@ -34,7 +65,6 @@ export default function DoctorPrescription() {
       <h2>📝 Write E-Prescription</h2>
 
       <form onSubmit={handleSubmit} className="prescription-form">
-        {/* Patient Information Section */}
         <div className="section">
           <h3>👤 Patient Information</h3>
           <input
@@ -60,7 +90,6 @@ export default function DoctorPrescription() {
           />
         </div>
 
-        {/* Medicine Section */}
         <div className="section">
           <h3>💊 Medicines</h3>
           {medicines.map((medicine, index) => (
@@ -79,7 +108,6 @@ export default function DoctorPrescription() {
           </button>
         </div>
 
-        {/* Notes Section */}
         <div className="section">
           <h3>📝 Doctor's Notes</h3>
           <textarea
