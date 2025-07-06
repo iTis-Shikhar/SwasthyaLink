@@ -1,29 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
-import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import { collection, addDoc, Timestamp, getDocs, query, where } from 'firebase/firestore';
 import { useAuth } from '../context/AuthContext';
-import './BookAppointment.css'; // (Optional: if you want custom styling)
+import './BookAppointment.css';
 
 function BookAppointment() {
   const { user } = useAuth();
 
-  const [doctor, setDoctor] = useState('');
+  // Dynamic doctor list
+  const [doctors, setDoctors] = useState([]);
+  const [loadingDoctors, setLoadingDoctors] = useState(true);
+
+  const [selectedDoctor, setSelectedDoctor] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [reason, setReason] = useState('');
 
+  // Fetch doctor list when component mounts
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const q = query(collection(db, 'users'), where('role', '==', 'Doctor'));
+        const querySnapshot = await getDocs(q);
+        const doctorList = querySnapshot.docs.map(doc => ({
+          uid: doc.id,
+          name: doc.data().name,
+        }));
+        setDoctors(doctorList);
+      } catch (error) {
+        console.error('Error fetching doctors:', error);
+        alert('Failed to load doctors.');
+      } finally {
+        setLoadingDoctors(false);
+      }
+    };
+
+    fetchDoctors();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!doctor || !date || !time) {
+    if (!selectedDoctor || !date || !time) {
       alert('Please fill all required fields.');
       return;
     }
 
+    const doctorObj = doctors.find(d => d.uid === selectedDoctor);
+
     try {
       await addDoc(collection(db, 'appointments'), {
         patientEmail: user?.email || '',
-        doctor,
+        doctorId: doctorObj.uid,
+        doctorName: doctorObj.name,
         date,
         time,
         reason,
@@ -32,7 +61,7 @@ function BookAppointment() {
 
       alert('Appointment booked successfully!');
       // Clear form
-      setDoctor('');
+      setSelectedDoctor('');
       setDate('');
       setTime('');
       setReason('');
@@ -46,13 +75,24 @@ function BookAppointment() {
     <div className="auth-container">
       <h2>Book Appointment</h2>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Doctor's Name"
-          value={doctor}
-          onChange={(e) => setDoctor(e.target.value)}
-          required
-        />
+        {/* Doctor dropdown */}
+        {loadingDoctors ? (
+          <p>Loading doctors...</p>
+        ) : (
+          <select
+            value={selectedDoctor}
+            onChange={(e) => setSelectedDoctor(e.target.value)}
+            required
+          >
+            <option value="">Select Doctor</option>
+            {doctors.map((doc) => (
+              <option key={doc.uid} value={doc.uid}>
+                {doc.name}
+              </option>
+            ))}
+          </select>
+        )}
+
         <input
           type="date"
           value={date}
