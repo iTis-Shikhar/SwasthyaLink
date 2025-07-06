@@ -38,7 +38,6 @@ function Register() {
 
       alert('Registered successfully!');
 
-      // Wait 300ms so the alert can show before navigation
       setTimeout(() => {
         const dashboardPath = getDashboardRouteByRole(role);
         navigate(dashboardPath);
@@ -85,6 +84,7 @@ function Register() {
         <select
           value={role}
           onChange={(e) => setRole(e.target.value)}
+          required
         >
           <option value="Patient">Patient</option>
           <option value="Doctor">Doctor</option>
