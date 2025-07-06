@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+SwasthyaLink 🌐💊
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+SwasthyaLink is a role-based connected healthcare platform built for hackathons and real-world deployment, with the aim to bridge the gap between patients, doctors, and clinics — especially in underserved and rural areas. It provides a seamless digital interface for scheduling appointments, accessing e-prescriptions, managing medicine stocks, and more.
 
-## Available Scripts
+🔗 Live Site: https://swasthyalink.web.app
 
-In the project directory, you can run:
+💡 Problem Statement
 
-### `npm start`
+In rural areas, access to timely medical help, qualified doctors, and consistent medicine supply remains a challenge. Clinics are often under-resourced and patients don’t have proper follow-up care.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+SwasthyaLink addresses this by:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Connecting rural clinics with assigned doctors for emergency consultations  
+Allowing patients to consult and get e-prescriptions digitally  
+Enabling medicine refill requests for clinics in critical need
 
-### `npm test`
+🚀 Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+🔐 Role-Based Dashboards:  
+Patient: Book appointment, view e-prescriptions, set reminders, join virtual visit.
+Doctor: View appointments, write e-prescriptions, conduct virtual visits.
+Clinic: Request medicine refills, initiate emergency doctor consultation.  
+📅 Appointment Booking:
+Patients can select doctors and book appointments.
+Doctors can track upcoming appointments.  
+📝 E-Prescription:
+Doctors can create, manage, and submit digital prescriptions.
+Patients can view prescriptions any time.  
+📦 Medicine Refill:
+Clinics can request bulk medicine restocks from suppliers.  
+📞 Emergency Teleconsultation:
+Clinics can initiate emergency calls to their assigned doctor to save lives in rural areas.  
+⚡ Secure Authentication:
+Login/Register flow built with Firebase Authentication.
+Role verification and route protection implemented.  
+🌐 Firebase Firestore:
+User data, appointments, and prescriptions are stored and synced in real-time.
 
-### `npm run build`
+🛠 Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+React.js (Frontend)  
+Firebase (Auth + Firestore + Hosting)  
+CSS (Custom styling)  
+GitHub Desktop (Version Control)  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+🧪 How It Works  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Each user registers with a role: Patient, Doctor, or Clinic.  
+Upon login, they are redirected to their respective dashboards.  
+Patients can book appointments and manage their prescriptions.  
+Doctors can write e-prescriptions and attend consultations.  
+Clinics can request medicine refills or consult doctors during emergencies.  
+All data is stored securely in Firebase Firestore.  
 
-### `npm run eject`
+🧑‍💻 Team ByteTogether  
+👨 Shikhar Verma (Team Leader)  
+👩 Katyayani Jaiswal  
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+📬 Contact  
+For questions or feedback, feel free to contact the developers through GitHub or during the hackathon.
