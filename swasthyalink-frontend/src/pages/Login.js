@@ -32,7 +32,8 @@ function Login() {
         const userData = docSnap.data();
         console.log('✅ Fetched user data:', userData);
 
-        const user = { email: userData.email, role: userData.role };
+        // ✅ Include uid here
+        const user = { uid, email: userData.email, role: userData.role };
         login(user);
 
         const dashboardPath = getDashboardRouteByRole(user.role);

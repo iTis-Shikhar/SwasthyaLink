@@ -3,9 +3,10 @@ import { createContext, useState, useContext } from 'react';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // { email, role }
+  const [user, setUser] = useState(null); // { uid, email, role }
 
   const login = (userData) => {
+    // Make sure userData includes uid
     setUser(userData);
   };
 
