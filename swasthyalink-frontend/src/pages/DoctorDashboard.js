@@ -17,11 +17,6 @@ export default function DoctorDashboard() {
           <button>Write Now</button>
         </div>
         <div className="dashboard-card">
-          <h3>📁 EHR - Health Records</h3>
-          <p>Access and review patient health records.</p>
-          <button>Access EHR</button>
-        </div>
-        <div className="dashboard-card">
           <h3>📹 Start Virtual Visit</h3>
           <p>Start a video consultation with a patient.</p>
           <button>Start Visit</button>
