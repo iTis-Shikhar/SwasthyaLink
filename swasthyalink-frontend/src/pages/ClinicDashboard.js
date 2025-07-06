@@ -7,24 +7,14 @@ export default function ClinicDashboard() {
       <h2 className="dashboard-title">Welcome, Clinic</h2>
       <div className="dashboard-grid">
         <div className="dashboard-card">
-          <h3>👨‍⚕️ Manage Doctors</h3>
-          <p>Add, remove, or update doctor profiles in your clinic.</p>
-          <button>Go to Doctor List</button>
+          <h3>💊 Medicine Refill</h3>
+          <p>Order essential medicines when your stock runs low.</p>
+          <button>Order Medicines</button>
         </div>
         <div className="dashboard-card">
-          <h3>📋 Manage Appointments</h3>
-          <p>View and coordinate appointments for all doctors.</p>
-          <button>Manage Schedule</button>
-        </div>
-        <div className="dashboard-card">
-          <h3>📁 Access Patient Records</h3>
-          <p>Secure access to all patient records in the clinic.</p>
-          <button>View Records</button>
-        </div>
-        <div className="dashboard-card">
-          <h3>📤 Upload Reports</h3>
-          <p>Upload lab test results or health reports for patients.</p>
-          <button>Upload Files</button>
+          <h3>🚨 Emergency Video Consultation</h3>
+          <p>Connect with an assigned doctor for urgent medical guidance in critical rural cases.</p>
+          <button>Start Emergency Call</button>
         </div>
       </div>
     </div>
