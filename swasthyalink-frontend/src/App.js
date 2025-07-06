@@ -13,13 +13,14 @@ import DoctorDashboard from './pages/DoctorDashboard';
 import ClinicDashboard from './pages/ClinicDashboard';
 import PrivateRoute from './components/PrivateRoute';
 
-// ✅ Existing import
 import BookAppointment from './pages/BookAppointment';
-
-// ✅ New imports for Patient pages
 import MyPrescription from './pages/MyPrescription';
 import SetReminders from './pages/SetReminders';
 import JoinVirtualVisit from './pages/JoinVirtualVisit';
+
+import DoctorAppointments from './pages/DoctorAppointments';
+// ✅ New import for prescription page
+import DoctorPrescription from './pages/DoctorPrescription';
 
 function App() {
   return (
@@ -45,6 +46,9 @@ function App() {
 
           <Route element={<PrivateRoute allowedRole="Doctor" />}>
             <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
+            <Route path="/doctor-appointments" element={<DoctorAppointments />} />
+            {/* ✅ New route for writing prescriptions */}
+            <Route path="/doctor-prescription" element={<DoctorPrescription />} />
           </Route>
 
           <Route element={<PrivateRoute allowedRole="Clinic" />}>
